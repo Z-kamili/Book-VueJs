@@ -1,10 +1,10 @@
 <template>
 
-
 <div>
+    <router-link :to="{name: 'Create' }" >Add Book</router-link>
 
-    <router-Link :to="{ name : 'Create' }" routerLinkActive="router-Link-active">Add Book</router-Link>
-<table class="table">
+
+    <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -15,22 +15,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row" v-for="item in items" :key="item.id">1</th>
+    <tr v-for="item in items" :key="item.id"> 
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
-      <td>{{item.description}}</td>
-      <td> 
-         <button type="button" class="btn btn-danger" @click="deleteBook(item.id)">Delete</button>
-        <router-link :to="{name:'Edit' , params:{id:itel.id}}" type="button" class="btn btn-warning">Edit</button>
-      </td>
-    </tr>
+     <td>{{item.price}}</td>
+     <td>{{item.description}}</td>
+      <td>
+            <button type="button" class="btn btn-danger" @click="deleteBook(item.id)">Delete</button>
+            <router-link :to="{name: 'Edit', params:{id:item.id} }" class="btn btn-warning">Edit</router-link>
+    </td>
+     
+   
+
+    </tr> 
   </tbody>
 </table>
+
 </div>
-
-
-
 
 </template>
 
@@ -69,7 +70,7 @@ export default {
 
              try {
                  
-                 await axios.get('http://127.0.0.1:8000/api/books/${id}');
+                 await axios.delete(`http://127.0.0.1:8000/api/books/${id}`);
                  this.getBooks();
   
              }catch (error) {
